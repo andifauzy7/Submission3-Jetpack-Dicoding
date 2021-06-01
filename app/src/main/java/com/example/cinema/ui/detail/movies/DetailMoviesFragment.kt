@@ -29,17 +29,28 @@ class DetailMoviesFragment(idContent: String?) : Fragment() {
         return fragmentDetailMoviesBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        fragmentDetailMoviesBinding.shimmerFrameLayout.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        fragmentDetailMoviesBinding.shimmerFrameLayout.stopShimmerAnimation()
+        super.onPause()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[DetailMoviesViewModel::class.java]
         val genreAdapter = GenreAdapter()
         EspressoIdlingResource.increment()
-        fragmentDetailMoviesBinding.progressBarMovieDetail.visibility = View.VISIBLE
         viewModel.getMovieDetail(idContent).observe(viewLifecycleOwner, { movies ->
             EspressoIdlingResource.decrement()
             if (movies.status == Resource.Status.SUCCESS) {
-                fragmentDetailMoviesBinding.progressBarMovieDetail.visibility = View.GONE
+                fragmentDetailMoviesBinding.shimmerFrameLayout.stopShimmerAnimation()
+                fragmentDetailMoviesBinding.shimmerFrameLayout.visibility = View.GONE
+                fragmentDetailMoviesBinding.containerDetailMovies.visibility = View.VISIBLE
                 context?.let {
                     Glide.with(it)
                             .load("https://image.tmdb.org/t/p/w500" + movies.data?.posterPath)
@@ -59,7 +70,6 @@ class DetailMoviesFragment(idContent: String?) : Fragment() {
                 fragmentDetailMoviesBinding.tvHomepageMovies.text = movies.data?.homepage
                 fragmentDetailMoviesBinding.tvOverviewMovies.text = movies.data?.overview
             } else if (movies.status == Resource.Status.ERROR) {
-                fragmentDetailMoviesBinding.progressBarMovieDetail.visibility = View.GONE
                 Toast.makeText(context, "Error : " + movies.message, Toast.LENGTH_LONG).show()
             }
         })

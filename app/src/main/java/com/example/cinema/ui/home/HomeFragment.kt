@@ -37,6 +37,11 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding.shimmerFrameLayout.startShimmerAnimation()
     }
 
+    override fun onPause() {
+        fragmentHomeBinding.shimmerFrameLayout.stopShimmerAnimation()
+        super.onPause()
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
