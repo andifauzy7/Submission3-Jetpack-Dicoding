@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.cinema.R
 import com.example.cinema.databinding.FragmentDetailTvshowBinding
 import com.example.cinema.ui.detail.GenreAdapter
 import com.example.cinema.utils.EspressoIdlingResource
@@ -73,6 +74,10 @@ class DetailTVShowFragment(idContent: String?) : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
             adapter = genreAdapter
+        }
+
+        fragmentDetailTVShowBinding.fabFavoriteTvshow.setOnClickListener {
+            fragmentDetailTVShowBinding.fabFavoriteTvshow.setImageResource(R.drawable.ic_baseline_favorite_24dp)
         }
     }
 }
