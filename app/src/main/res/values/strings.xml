@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Cinema</string>
+    <string name="title_home">Home</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_profile">Profile</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="tv_show_title">TV Show Title</string>
+    <string name="popular_tv_show">Popular TV Show</string>
+    <string name="hi_user">Hi, User!</string>
+    <string name="name_profile">Name Profile</string>
+    <string name="gender_profile">Gender Profile</string>
+    <string name="movies">Movies</string>
+    <string name="tv_show">TV Show</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title">Title</string>
+    <string name="movies_title">Movies Title</string>
+    <string name="budget">Budget</string>
+    <string name="movies_budget">Movies Budget</string>
+    <string name="genre">Genre</string>
+    <string name="movies_genre">Movies Genre</string>
+    <string name="rating">Rating</string>
+    <string name="released">Released :</string>
+    <string name="homepage_movies">Homepage Movies</string>
+    <string name="overview">Overview</string>
+    <string name="overview_movies">Overview Movies</string>
+    <string name="tagline">Tagline</string>
+    <string name="tagline_show">Tagline Show</string>
+    <string name="first_air">First Air</string>
+    <string name="homepage_show">Homepage Show</string>
+    <string name="overview_show">Overview Show</string>
+    <string name="magazine">Magazine+</string>
+    <string name="cinema">Cinema</string>
+    <string name="name">Name ...</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="login">Login</string>
+</resources>

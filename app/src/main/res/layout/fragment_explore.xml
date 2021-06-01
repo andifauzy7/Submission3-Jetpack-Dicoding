@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/navy"
+    tools:context=".ui.explore.ExploreFragment">
+
+    <RadioGroup
+        android:id="@+id/radio_group_type_explore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_constraintEnd_toEndOf="@+id/search_item_explore"
+        app:layout_constraintStart_toStartOf="@+id/search_item_explore"
+        app:layout_constraintTop_toBottomOf="@+id/search_item_explore">
+
+        <RadioButton
+            android:id="@+id/movies_button_explore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/movies" />
+
+        <RadioButton
+            android:id="@+id/show_button_explore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_show" />
+    </RadioGroup>
+
+    <SearchView
+        android:id="@+id/search_item_explore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/navy_half"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_explore_movies"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/radio_group_type_explore"
+        app:layout_constraintStart_toStartOf="@+id/radio_group_type_explore"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group_type_explore"
+        tools:listitem="@layout/item_movies_explore" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_explore_show"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/radio_group_type_explore"
+        app:layout_constraintStart_toStartOf="@+id/radio_group_type_explore"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group_type_explore"
+        tools:listitem="@layout/item_tvshow_explore" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
