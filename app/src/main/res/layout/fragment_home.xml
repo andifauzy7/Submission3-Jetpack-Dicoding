@@ -14,14 +14,54 @@
         android:orientation="horizontal"
         tools:context=".ui.home.HomeFragment">
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/profile_image_home"
+            app:layout_constraintStart_toStartOf="@+id/tv_greeting"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image_home">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_popular_movies_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/popular_movies"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <include layout="@layout/item_movies_shimmer" />
+                    <include layout="@layout/item_movies_shimmer" />
+                    <include layout="@layout/item_movies_shimmer" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_popular_tv_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/popular_tv_show"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <include layout="@layout/item_movies_shimmer" />
+                    <include layout="@layout/item_movies_shimmer" />
+                    <include layout="@layout/item_movies_shimmer" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <TextView
             android:id="@+id/tv_greeting"
@@ -39,6 +79,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_home"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_greeting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_greeting"
+            app:layout_constraintTop_toTopOf="@+id/tv_greeting"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <!-- Tampilan Data -->
+
         <TextView
             android:id="@+id/tv_popular_movies"
             android:layout_width="0dp"
@@ -54,7 +111,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_image_home" />
+            app:layout_constraintTop_toBottomOf="@+id/shimmerFrameLayout" />
 
         <TextView
             android:id="@+id/tv_popular_tv"
@@ -91,21 +148,6 @@
             app:layout_constraintEnd_toEndOf="@+id/tv_popular_tv"
             app:layout_constraintStart_toStartOf="@+id/tv_popular_tv"
             app:layout_constraintTop_toBottomOf="@+id/tv_popular_tv" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image_home"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_greeting"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_greeting"
-            app:layout_constraintTop_toTopOf="@+id/tv_greeting"
-            tools:src="@tools:sample/backgrounds/scenic" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

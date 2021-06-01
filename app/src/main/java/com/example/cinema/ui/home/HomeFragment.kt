@@ -32,6 +32,11 @@ class HomeFragment : Fragment() {
         return fragmentHomeBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        fragmentHomeBinding.shimmerFrameLayout.startShimmerAnimation()
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,9 +63,7 @@ class HomeFragment : Fragment() {
             viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
             val moviesAdapterPopular = MoviesAdapter()
             EspressoIdlingResource.increment()
-            fragmentHomeBinding.progressBar.visibility = View.VISIBLE
             viewModel.getMoviesPopular().observe(viewLifecycleOwner, { movies ->
-                fragmentHomeBinding.progressBar.visibility = View.GONE
                 EspressoIdlingResource.decrement()
                 if (movies.status == Resource.Status.SUCCESS) {
                     moviesAdapterPopular.setMovies(movies.data)
@@ -73,11 +76,11 @@ class HomeFragment : Fragment() {
 
             val tvShowAdapterPopular = TVShowAdapter()
             EspressoIdlingResource.increment()
-            fragmentHomeBinding.progressBar.visibility = View.VISIBLE
             viewModel.getTVShowPopular().observe(viewLifecycleOwner, { show ->
                 EspressoIdlingResource.decrement()
-                fragmentHomeBinding.progressBar.visibility = View.GONE
                 if (show.status == Resource.Status.SUCCESS) {
+                    fragmentHomeBinding.shimmerFrameLayout.stopShimmerAnimation()
+                    fragmentHomeBinding.shimmerFrameLayout.visibility = View.GONE
                     tvShowAdapterPopular.setShow(show.data!!)
                     tvShowAdapterPopular.notifyDataSetChanged()
                 }
@@ -85,6 +88,7 @@ class HomeFragment : Fragment() {
                     Toast.makeText(context, "Error : " + show.message, Toast.LENGTH_LONG).show()
                 }
             })
+
 
             with(fragmentHomeBinding.rvPopular) {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
