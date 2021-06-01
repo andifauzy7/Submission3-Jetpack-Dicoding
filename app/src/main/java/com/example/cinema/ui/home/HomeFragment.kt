@@ -37,11 +37,6 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding.shimmerFrameLayout.startShimmerAnimation()
     }
 
-    override fun onPause() {
-        fragmentHomeBinding.shimmerFrameLayout.stopShimmerAnimation()
-        super.onPause()
-    }
-
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -86,6 +81,7 @@ class HomeFragment : Fragment() {
                 if (show.status == Resource.Status.SUCCESS) {
                     fragmentHomeBinding.shimmerFrameLayout.stopShimmerAnimation()
                     fragmentHomeBinding.shimmerFrameLayout.visibility = View.GONE
+                    fragmentHomeBinding.contentHome.visibility = View.VISIBLE
                     tvShowAdapterPopular.setShow(show.data!!)
                     tvShowAdapterPopular.notifyDataSetChanged()
                 }
