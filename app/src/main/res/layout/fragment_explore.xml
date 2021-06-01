@@ -46,6 +46,113 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/radio_group_type_explore"
+        app:layout_constraintStart_toStartOf="@+id/radio_group_type_explore"
+        app:layout_constraintTop_toBottomOf="@id/radio_group_type_explore">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:src="@color/blue_light"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_explore_movies"
         android:layout_width="match_parent"
@@ -54,10 +161,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/radio_group_type_explore"
         app:layout_constraintStart_toStartOf="@+id/radio_group_type_explore"
-        app:layout_constraintTop_toBottomOf="@+id/radio_group_type_explore"
+        app:layout_constraintTop_toBottomOf="@+id/shimmerFrameLayout"
         tools:listitem="@layout/item_movies_explore" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -68,10 +176,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/radio_group_type_explore"
         app:layout_constraintStart_toStartOf="@+id/radio_group_type_explore"
-        app:layout_constraintTop_toBottomOf="@+id/radio_group_type_explore"
+        app:layout_constraintTop_toBottomOf="@+id/shimmerFrameLayout"
         tools:listitem="@layout/item_tvshow_explore" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

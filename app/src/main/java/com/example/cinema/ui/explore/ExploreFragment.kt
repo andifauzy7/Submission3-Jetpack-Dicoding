@@ -37,10 +37,15 @@ class ExploreFragment : Fragment() {
         fragmentExploreBinding.searchItemExplore.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 fragmentExploreBinding.searchItemExplore.onActionViewCollapsed()
+                fragmentExploreBinding.shimmerFrameLayout.visibility = View.VISIBLE
+                fragmentExploreBinding.shimmerFrameLayout.startShimmerAnimation()
+
                 if(fragmentExploreBinding.radioGroupTypeExplore.checkedRadioButtonId == fragmentExploreBinding.moviesButtonExplore.id){
                     exploreViewModel.getMoviesSearch(query.toString()).observe(viewLifecycleOwner, { movies ->
-                        fragmentExploreBinding.rvExploreMovies.visibility = View.VISIBLE
+                        fragmentExploreBinding.shimmerFrameLayout.stopShimmerAnimation()
+                        fragmentExploreBinding.shimmerFrameLayout.visibility = View.GONE
                         fragmentExploreBinding.rvExploreShow.visibility = View.GONE
+                        fragmentExploreBinding.rvExploreMovies.visibility = View.VISIBLE
                         if (movies.status == Resource.Status.SUCCESS) {
                             moviesAdapterPopular.setMovies(movies.data)
                             moviesAdapterPopular.notifyDataSetChanged()
@@ -51,6 +56,8 @@ class ExploreFragment : Fragment() {
                     })
                 } else {
                     exploreViewModel.getShowSearch(query.toString()).observe(viewLifecycleOwner, { show ->
+                        fragmentExploreBinding.shimmerFrameLayout.stopShimmerAnimation()
+                        fragmentExploreBinding.shimmerFrameLayout.visibility = View.GONE
                         fragmentExploreBinding.rvExploreShow.visibility = View.VISIBLE
                         fragmentExploreBinding.rvExploreMovies.visibility = View.GONE
                         if (show.status == Resource.Status.SUCCESS) {
