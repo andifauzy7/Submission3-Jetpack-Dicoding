@@ -27,17 +27,28 @@ class DetailTVShowFragment(idContent: String?) : Fragment() {
         return fragmentDetailTVShowBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        fragmentDetailTVShowBinding.shimmerFrameLayout.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        fragmentDetailTVShowBinding.shimmerFrameLayout.stopShimmerAnimation()
+        super.onPause()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[DetailTVShowViewModel::class.java]
         val genreAdapter = GenreAdapter()
         EspressoIdlingResource.increment()
-        fragmentDetailTVShowBinding.progressBarShowDetail.visibility = View.VISIBLE
         viewModel.getTVShowDetail(idContent).observe(viewLifecycleOwner, { tv ->
             EspressoIdlingResource.decrement()
             if (tv.status == Resource.Status.SUCCESS) {
-                fragmentDetailTVShowBinding.progressBarShowDetail.visibility = View.GONE
+                fragmentDetailTVShowBinding.shimmerFrameLayout.stopShimmerAnimation()
+                fragmentDetailTVShowBinding.shimmerFrameLayout.visibility = View.GONE
+                fragmentDetailTVShowBinding.containerDetailTvshow.visibility = View.VISIBLE
                 context?.let {
                     Glide.with(it)
                             .load("https://image.tmdb.org/t/p/w500" + tv.data?.posterPath)
@@ -54,7 +65,6 @@ class DetailTVShowFragment(idContent: String?) : Fragment() {
                 fragmentDetailTVShowBinding.tvHomepageShow.text = tv.data?.homepage
                 fragmentDetailTVShowBinding.tvOverviewShow.text = tv.data?.overview
             } else if (tv.status == Resource.Status.ERROR) {
-                fragmentDetailTVShowBinding.progressBarShowDetail.visibility = View.GONE
                 Toast.makeText(context, "Error : " + tv.message, Toast.LENGTH_LONG).show()
             }
         })
