@@ -45,9 +45,11 @@ class MovieRepository(context: Context) {
         }
     }
 
-    fun deleteMoviesDB(movie : MovieEntity) {
+    fun getMoviesByIdDB(movieId: String) : LiveData<MovieEntity> = movieDao.getMoviesById(movieId)
+
+    fun deleteMoviesDB(movieId: String) {
         executorService.execute {
-            movieDao.deleteMovies(movie)
+            movieDao.deleteMovies(movieId)
         }
     }
 
@@ -58,6 +60,8 @@ class MovieRepository(context: Context) {
             movieDao.insertTVShow(show)
         }
     }
+
+    fun getTVShowByIdDB(showId: String) : LiveData<TVShowEntity> = movieDao.getTVShowById(showId)
 
     fun deleteTVShowDB(show : TVShowEntity) {
         executorService.execute {

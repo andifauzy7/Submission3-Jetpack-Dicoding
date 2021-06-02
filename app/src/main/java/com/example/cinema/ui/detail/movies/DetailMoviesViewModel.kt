@@ -15,4 +15,12 @@ class DetailMoviesViewModel(private val movieRepository: MovieRepository) : View
     fun addMovieFavorite(movie : MovieEntity){
         movieRepository.insertMoviesDB(movie)
     }
+
+    fun deleteMovieFavorite(id: String){
+        movieRepository.deleteMoviesDB(id)
+    }
+
+    fun isMovieFavorite(id: String) : LiveData<MovieEntity> {
+        return movieRepository.getMoviesByIdDB(id)
+    }
 }
