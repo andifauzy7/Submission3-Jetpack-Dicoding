@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.cinema.R
 import com.example.cinema.databinding.FragmentDetailTvshowBinding
+import com.example.cinema.room.entity.TVShowEntity
 import com.example.cinema.ui.detail.GenreAdapter
 import com.example.cinema.utils.EspressoIdlingResource
 import com.example.cinema.utils.Resource
@@ -21,6 +21,7 @@ class DetailTVShowFragment(idContent: String?) : Fragment() {
     private var idContent : String = idContent.toString()
     private lateinit var viewModel: DetailTVShowViewModel
     private lateinit var fragmentDetailTVShowBinding: FragmentDetailTvshowBinding
+    private lateinit var tvShowEntity: TVShowEntity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -47,6 +48,7 @@ class DetailTVShowFragment(idContent: String?) : Fragment() {
         viewModel.getTVShowDetail(idContent).observe(viewLifecycleOwner, { tv ->
             EspressoIdlingResource.decrement()
             if (tv.status == Resource.Status.SUCCESS) {
+                tvShowEntity = TVShowEntity(idContent, tv.data?.name!!, "https://image.tmdb.org/t/p/w500" + tv.data?.posterPath)
                 fragmentDetailTVShowBinding.shimmerFrameLayout.stopShimmerAnimation()
                 fragmentDetailTVShowBinding.shimmerFrameLayout.visibility = View.GONE
                 fragmentDetailTVShowBinding.containerDetailTvshow.visibility = View.VISIBLE
@@ -77,7 +79,8 @@ class DetailTVShowFragment(idContent: String?) : Fragment() {
         }
 
         fragmentDetailTVShowBinding.fabFavoriteTvshow.setOnClickListener {
-            fragmentDetailTVShowBinding.fabFavoriteTvshow.setImageResource(R.drawable.ic_baseline_favorite_24dp)
+            //fragmentDetailTVShowBinding.fabFavoriteTvshow.setImageResource(R.drawable.ic_baseline_favorite_24dp)
+            viewModel.addShowFavorite(tvShowEntity)
         }
     }
 }

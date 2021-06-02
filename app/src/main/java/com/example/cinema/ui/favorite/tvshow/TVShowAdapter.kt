@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.cinema.databinding.ItemTvshowBinding
+import com.example.cinema.databinding.ItemTvshowFavoriteBinding
 import com.example.cinema.room.entity.TVShowEntity
 import com.example.cinema.ui.detail.DetailActivity
 
@@ -18,15 +18,15 @@ class TVShowAdapter : RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
         this.listTVShow.addAll(tvShow)
     }
 
-    class TVShowViewHolder(private val binding: ItemTvshowBinding) : RecyclerView.ViewHolder(binding.root) {
+    class TVShowViewHolder(private val binding: ItemTvshowFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow : TVShowEntity){
             with(binding){
-                tvTvshowTitle.text = tvShow.showTitle
+                tvItemNameShow.text = tvShow.showTitle
                 Glide.with(itemView.context)
                         .load("https://image.tmdb.org/t/p/w500" + tvShow.showPoster)
                         .centerCrop()
                         .transform(RoundedCorners(16))
-                        .into(imageTvPoster)
+                        .into(imgPosterShow)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.ID_CONTENT, tvShow.showId)
@@ -38,7 +38,7 @@ class TVShowAdapter : RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowViewHolder {
-        val itemTvShowBinding = ItemTvshowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemTvShowBinding = ItemTvshowFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TVShowViewHolder(itemTvShowBinding)
     }
 

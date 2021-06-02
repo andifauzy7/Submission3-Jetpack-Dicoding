@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/img_poster_movies"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="240dp"
             android:src="@color/teal_200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

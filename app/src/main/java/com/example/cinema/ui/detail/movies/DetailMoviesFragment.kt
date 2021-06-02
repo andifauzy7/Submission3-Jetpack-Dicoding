@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.cinema.R
 import com.example.cinema.databinding.FragmentDetailMoviesBinding
+import com.example.cinema.room.entity.MovieEntity
 import com.example.cinema.ui.detail.GenreAdapter
 import com.example.cinema.utils.EspressoIdlingResource
 import com.example.cinema.utils.Resource
@@ -23,6 +24,7 @@ class DetailMoviesFragment(idContent: String?) : Fragment() {
     private var idContent : String = idContent.toString()
     private lateinit var viewModel: DetailMoviesViewModel
     private lateinit var fragmentDetailMoviesBinding: FragmentDetailMoviesBinding
+    private lateinit var movieEntity: MovieEntity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -49,6 +51,7 @@ class DetailMoviesFragment(idContent: String?) : Fragment() {
         viewModel.getMovieDetail(idContent).observe(viewLifecycleOwner, { movies ->
             EspressoIdlingResource.decrement()
             if (movies.status == Resource.Status.SUCCESS) {
+                movieEntity = MovieEntity(idContent, movies.data?.title!!, "https://image.tmdb.org/t/p/w500" + movies.data?.posterPath)
                 fragmentDetailMoviesBinding.shimmerFrameLayout.stopShimmerAnimation()
                 fragmentDetailMoviesBinding.shimmerFrameLayout.visibility = View.GONE
                 fragmentDetailMoviesBinding.containerDetailMovies.visibility = View.VISIBLE
@@ -82,7 +85,8 @@ class DetailMoviesFragment(idContent: String?) : Fragment() {
         }
 
         fragmentDetailMoviesBinding.fabFavoriteMovies.setOnClickListener {
-            fragmentDetailMoviesBinding.fabFavoriteMovies.setImageResource(R.drawable.ic_baseline_favorite_24dp)
+            //fragmentDetailMoviesBinding.fabFavoriteMovies.setImageResource(R.drawable.ic_baseline_favorite_24dp)
+            viewModel.addMovieFavorite(movieEntity)
         }
     }
 }
