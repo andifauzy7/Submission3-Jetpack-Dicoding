@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -52,6 +53,10 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation "de.hdodenhof:circleimageview:$circleImageVersion"
+
+    // Room
+    implementation "androidx.room:room-runtime:$roomRuntimeVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 
     // API
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"

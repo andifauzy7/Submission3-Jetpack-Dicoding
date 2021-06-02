@@ -9,6 +9,8 @@ import com.example.cinema.ui.detail.movies.DetailMoviesViewModel
 import com.example.cinema.ui.detail.tvshow.DetailTVShowViewModel
 import com.example.cinema.ui.explore.ExploreViewModel
 import com.example.cinema.ui.favorite.FavoriteViewModel
+import com.example.cinema.ui.favorite.movies.MoviesViewModel
+import com.example.cinema.ui.favorite.tvshow.TVShowViewModel
 import com.example.cinema.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val movieRepository: MovieRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -34,6 +36,12 @@ class ViewModelFactory private constructor(private val movieRepository: MovieRep
             }
             modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
                 FavoriteViewModel(movieRepository) as T
+            }
+            modelClass.isAssignableFrom(MoviesViewModel::class.java) -> {
+                MoviesViewModel(movieRepository) as T
+            }
+            modelClass.isAssignableFrom(TVShowViewModel::class.java) -> {
+                TVShowViewModel(movieRepository) as T
             }
             modelClass.isAssignableFrom(DetailMoviesViewModel::class.java) -> {
                 DetailMoviesViewModel(movieRepository) as T

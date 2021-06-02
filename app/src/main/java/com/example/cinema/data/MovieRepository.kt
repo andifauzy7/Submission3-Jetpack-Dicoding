@@ -1,24 +1,68 @@
 package com.example.cinema.data
 
+import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cinema.data.api.ApiConfig
 import com.example.cinema.data.response.*
+import com.example.cinema.room.MovieDao
+import com.example.cinema.room.MovieDatabase
+import com.example.cinema.room.entity.MovieEntity
+import com.example.cinema.room.entity.TVShowEntity
 import com.example.cinema.utils.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
-class MovieRepository {
+class MovieRepository(context: Context) {
+
+    private val movieDao : MovieDao
+    private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
+
+    init {
+        val db = MovieDatabase.getInstance(context)
+        movieDao = db.movieDao()
+    }
 
     companion object {
         @Volatile
         private var instance: MovieRepository? = null
 
-        fun getInstance(): MovieRepository =
+        fun getInstance(context: Context): MovieRepository =
             instance ?: synchronized(this) {
-                MovieRepository().apply { instance = this }
+                MovieRepository(context).apply { instance = this }
             }
+    }
+
+    fun getAllMoviesDB() : LiveData<List<MovieEntity>> = movieDao.getMovies()
+
+    fun insertMoviesDB(movie : MovieEntity){
+        executorService.execute {
+            movieDao.insertMovies(movie)
+        }
+    }
+
+    fun deleteMoviesDB(movie : MovieEntity) {
+        executorService.execute {
+            movieDao.deleteMovies(movie)
+        }
+    }
+
+    fun getAllTVShowDB() : LiveData<List<TVShowEntity>> = movieDao.getTVShow()
+
+    fun insertTVShowDB(show : TVShowEntity){
+        executorService.execute {
+            movieDao.insertTVShow(show)
+        }
+    }
+
+    fun deleteTVShowDB(show : TVShowEntity) {
+        executorService.execute {
+            movieDao.deleteTVShow(show)
+        }
     }
 
     fun getMoviesPopular() : MutableLiveData<Resource<List<ResultMovies>>>{

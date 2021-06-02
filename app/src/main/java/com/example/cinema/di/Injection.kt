@@ -7,6 +7,6 @@ import com.example.cinema.data.MovieRepository
 
 object Injection {
     fun provideRepository(context: Context): MovieRepository {
-        return MovieRepository.getInstance()
+        return MovieRepository.getInstance(context)
     }
 }
