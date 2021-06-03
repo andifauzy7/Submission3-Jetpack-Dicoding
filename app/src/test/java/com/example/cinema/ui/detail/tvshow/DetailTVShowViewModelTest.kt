@@ -1,6 +1,7 @@
 package com.example.cinema.ui.detail.tvshow
 
 import com.example.cinema.data.MovieRepository
+import com.example.cinema.room.entity.TVShowEntity
 import com.example.cinema.utils.DataDummy
 import org.junit.Assert
 import org.junit.Test
@@ -28,5 +29,15 @@ class DetailTVShowViewModelTest {
         Mockito.verify(movieRepository).getTVShowDetail("1")
         Assert.assertNotNull(resultViewModel)
         Assert.assertEquals(1, resultViewModel.value?.data?.id)
+    }
+
+    @Test
+    fun getTVShowFavorite() {
+        val tvShowEntity = TVShowEntity("1", "Dummy", "Poster")
+        Mockito.`when`(movieRepository.getTVShowByIdDB("1")).thenReturn(tvShowEntity)
+        val resultViewModel = viewModel.getShowFavorite("1")
+        Mockito.verify(movieRepository).getTVShowByIdDB("1")
+        Assert.assertNotNull(resultViewModel)
+        Assert.assertEquals(tvShowEntity, resultViewModel)
     }
 }

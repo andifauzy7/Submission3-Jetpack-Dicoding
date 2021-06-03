@@ -2,6 +2,9 @@ package com.example.cinema.utils
 
 import androidx.lifecycle.MutableLiveData
 import com.example.cinema.data.response.*
+import com.example.cinema.room.entity.MovieEntity
+import com.example.cinema.room.entity.TVShowEntity
+import java.util.ArrayList
 
 object DataDummy {
     fun getMoviesPopular(): MutableLiveData<Resource<List<ResultMovies>>> {
@@ -163,5 +166,21 @@ object DataDummy {
                 voteCount = 100
         )
         return MutableLiveData(Resource.success(show))
+    }
+
+    fun generateMovieDB(): List<MovieEntity> {
+        val movies = ArrayList<MovieEntity>()
+        movies.add(MovieEntity(movieId = "1", movieTitle = "Dummy 1", moviePoster = "Dummy Poster 1"))
+        movies.add(MovieEntity(movieId = "2", movieTitle = "Dummy 2", moviePoster = "Dummy Poster 2"))
+        movies.add(MovieEntity(movieId = "3", movieTitle = "Dummy 3", moviePoster = "Dummy Poster 3"))
+        return movies
+    }
+
+    fun generateShowDB(): List<TVShowEntity> {
+        val show = ArrayList<TVShowEntity>()
+        show.add(TVShowEntity(showId = "1", showTitle = "Dummy 1", showPoster = "Dummy Poster 1"))
+        show.add(TVShowEntity(showId = "2", showTitle = "Dummy 2", showPoster = "Dummy Poster 2"))
+        show.add(TVShowEntity(showId = "3", showTitle = "Dummy 3", showPoster = "Dummy Poster 3"))
+        return show
     }
 }
