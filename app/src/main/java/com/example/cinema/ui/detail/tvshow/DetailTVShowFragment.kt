@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.cinema.R
 import com.example.cinema.databinding.FragmentDetailTvshowBinding
 import com.example.cinema.room.entity.TVShowEntity
 import com.example.cinema.ui.detail.GenreAdapter
@@ -78,9 +79,26 @@ class DetailTVShowFragment(idContent: String?) : Fragment() {
             adapter = genreAdapter
         }
 
+        checkIsFavorite()
         fragmentDetailTVShowBinding.fabFavoriteTvshow.setOnClickListener {
-            //fragmentDetailTVShowBinding.fabFavoriteTvshow.setImageResource(R.drawable.ic_baseline_favorite_24dp)
-            viewModel.addShowFavorite(tvShowEntity)
+            @Suppress("SENSELESS_COMPARISON")
+            if(viewModel.getShowFavorite(idContent) == null){
+                viewModel.addShowFavorite(tvShowEntity)
+                Toast.makeText(requireContext(), "Added To Favorite", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.deleteShowFavorite(idContent)
+                Toast.makeText(requireContext(), "Deleted From Favorite", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun checkIsFavorite(){
+        viewModel.isShowFavorite(idContent).observe(viewLifecycleOwner, { movies ->
+            if(movies == null){
+                fragmentDetailTVShowBinding.fabFavoriteTvshow.setImageResource(R.drawable.ic_baseline_favorite_border_24dp)
+            } else {
+                fragmentDetailTVShowBinding.fabFavoriteTvshow.setImageResource(R.drawable.ic_baseline_favorite_24dp)
+            }
+        })
     }
 }

@@ -29,8 +29,11 @@ interface MovieDao {
     fun insertTVShow(show: TVShowEntity)
 
     @Query("SELECT * FROM tvshowentities WHERE showId = :showId")
-    fun getTVShowById(showId: String): LiveData<TVShowEntity>
+    fun getTVShowById(showId: String): TVShowEntity
 
-    @Delete
-    fun deleteTVShow(show: TVShowEntity)
+    @Query("SELECT * FROM tvshowentities WHERE showId = :showId")
+    fun getTVShowByIdDBLiveData(showId: String): LiveData<TVShowEntity>
+
+    @Query("DELETE FROM tvshowentities WHERE showId = :showId")
+    fun deleteTVShow(showId: String)
 }

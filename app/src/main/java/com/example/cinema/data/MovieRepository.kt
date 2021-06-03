@@ -63,11 +63,13 @@ class MovieRepository(context: Context) {
         }
     }
 
-    fun getTVShowByIdDB(showId: String) : LiveData<TVShowEntity> = movieDao.getTVShowById(showId)
+    fun getTVShowByIdDB(showId: String) : TVShowEntity = movieDao.getTVShowById(showId)
 
-    fun deleteTVShowDB(show : TVShowEntity) {
+    fun getTVShowByIdDBLiveData(showId: String) : LiveData<TVShowEntity> = movieDao.getTVShowByIdDBLiveData(showId)
+
+    fun deleteTVShowDB(showId: String) {
         executorService.execute {
-            movieDao.deleteTVShow(show)
+            movieDao.deleteTVShow(showId)
         }
     }
 
