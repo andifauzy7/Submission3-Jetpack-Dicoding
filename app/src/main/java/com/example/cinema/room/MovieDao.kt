@@ -24,7 +24,7 @@ interface MovieDao {
     fun deleteMovies(movieId: String)
 
     @Query("SELECT * FROM tvshowentities")
-    fun getTVShow(): LiveData<List<TVShowEntity>>
+    fun getTVShow(): DataSource.Factory<Int, TVShowEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTVShow(show: TVShowEntity)

@@ -17,12 +17,12 @@ class MoviesPagedListAdapter :
     PagedListAdapter<MovieEntity, MoviesPagedListAdapter.MoviesViewHolder>(DIFF_CALLBACK)  {
     companion object {
         private val DIFF_CALLBACK: DiffUtil.ItemCallback<MovieEntity> = object : DiffUtil.ItemCallback<MovieEntity>() {
-            override fun areItemsTheSame(oldNote: MovieEntity, newNote: MovieEntity): Boolean {
-                return oldNote.movieId == newNote.movieId
+            override fun areItemsTheSame(old: MovieEntity, new: MovieEntity): Boolean {
+                return old.movieId == new.movieId
             }
             @SuppressLint("DiffUtilEquals")
-            override fun areContentsTheSame(oldNote: MovieEntity, newNote: MovieEntity): Boolean {
-                return oldNote == newNote
+            override fun areContentsTheSame(old: MovieEntity, new: MovieEntity): Boolean {
+                return old == new
             }
         }
     }

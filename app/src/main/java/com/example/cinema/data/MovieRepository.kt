@@ -56,7 +56,7 @@ class MovieRepository(context: Context) {
         }
     }
 
-    fun getAllTVShowDB() : LiveData<List<TVShowEntity>> = movieDao.getTVShow()
+    fun getAllTVShowDB() : DataSource.Factory<Int, TVShowEntity> = movieDao.getTVShow()
 
     fun insertTVShowDB(show : TVShowEntity){
         executorService.execute {

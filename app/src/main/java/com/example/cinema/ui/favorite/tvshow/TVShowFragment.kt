@@ -27,9 +27,9 @@ class TVShowFragment : Fragment() {
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[TVShowViewModel::class.java]
 
-        val tvShowAdapter = TVShowAdapter()
+        val tvShowAdapter = TVShowPagedListAdapter()
         viewModel.getAllTVShow().observe(viewLifecycleOwner,{ show ->
-            tvShowAdapter.setShow(show)
+            tvShowAdapter.submitList(show)
             tvShowAdapter.notifyDataSetChanged()
         })
 
