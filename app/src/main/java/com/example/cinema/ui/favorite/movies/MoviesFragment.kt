@@ -27,9 +27,9 @@ class MoviesFragment : Fragment() {
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
 
-        val moviesAdapterPopular = MoviesAdapter()
+        val moviesAdapterPopular = MoviesPagedListAdapter()
         viewModel.getAllMovies().observe(viewLifecycleOwner,{ movies ->
-            moviesAdapterPopular.setMovies(movies)
+            moviesAdapterPopular.submitList(movies)
             moviesAdapterPopular.notifyDataSetChanged()
         })
 

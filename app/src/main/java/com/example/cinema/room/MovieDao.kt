@@ -1,6 +1,7 @@
 package com.example.cinema.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.example.cinema.room.entity.MovieEntity
 import com.example.cinema.room.entity.TVShowEntity
@@ -8,7 +9,7 @@ import com.example.cinema.room.entity.TVShowEntity
 @Dao
 interface MovieDao {
     @Query("SELECT * FROM moviesentities")
-    fun getMovies(): LiveData<List<MovieEntity>>
+    fun getMovies(): DataSource.Factory<Int, MovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovies(movie: MovieEntity)

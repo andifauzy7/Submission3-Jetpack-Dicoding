@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import com.example.cinema.data.api.ApiConfig
 import com.example.cinema.data.response.*
 import com.example.cinema.room.MovieDao
@@ -37,7 +38,7 @@ class MovieRepository(context: Context) {
             }
     }
 
-    fun getAllMoviesDB() : LiveData<List<MovieEntity>> = movieDao.getMovies()
+    fun getAllMoviesDB() : DataSource.Factory<Int, MovieEntity>  = movieDao.getMovies()
 
     fun insertMoviesDB(movie : MovieEntity){
         executorService.execute {
