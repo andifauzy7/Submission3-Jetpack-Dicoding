@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.cinema.ui.favorite
 
 import android.content.Context
