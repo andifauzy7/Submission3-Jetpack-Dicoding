@@ -36,6 +36,7 @@ class ExploreFragment : Fragment() {
 
         fragmentExploreBinding.searchItemExplore.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                fragmentExploreBinding.animationView.visibility = View.GONE
                 fragmentExploreBinding.searchItemExplore.onActionViewCollapsed()
                 fragmentExploreBinding.shimmerFrameLayout.visibility = View.VISIBLE
                 fragmentExploreBinding.shimmerFrameLayout.startShimmerAnimation()

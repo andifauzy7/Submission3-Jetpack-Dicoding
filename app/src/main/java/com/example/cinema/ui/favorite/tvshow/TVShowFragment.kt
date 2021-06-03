@@ -29,6 +29,11 @@ class TVShowFragment : Fragment() {
 
         val tvShowAdapter = TVShowPagedListAdapter()
         viewModel.getAllTVShow().observe(viewLifecycleOwner,{ show ->
+            if(show.isNotEmpty()){
+                fragmentTVShowBinding.animationView.visibility = View.GONE
+            } else {
+                fragmentTVShowBinding.animationView.visibility = View.VISIBLE
+            }
             tvShowAdapter.submitList(show)
             tvShowAdapter.notifyDataSetChanged()
         })

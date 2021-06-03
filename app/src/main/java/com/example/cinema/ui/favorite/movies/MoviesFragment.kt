@@ -29,6 +29,11 @@ class MoviesFragment : Fragment() {
 
         val moviesAdapterPopular = MoviesPagedListAdapter()
         viewModel.getAllMovies().observe(viewLifecycleOwner,{ movies ->
+            if(movies.isNotEmpty()){
+                fragmentMoviesBinding.animationView.visibility = View.GONE
+            } else {
+                fragmentMoviesBinding.animationView.visibility = View.VISIBLE
+            }
             moviesAdapterPopular.submitList(movies)
             moviesAdapterPopular.notifyDataSetChanged()
         })
