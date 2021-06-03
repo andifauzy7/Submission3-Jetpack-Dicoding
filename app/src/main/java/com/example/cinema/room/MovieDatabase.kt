@@ -22,7 +22,7 @@ abstract class MovieDatabase : RoomDatabase() {
                             context.applicationContext,
                             MovieDatabase::class.java,
                             "Movies.db"
-                    ).build().apply {
+                    ).allowMainThreadQueries().build().apply {
                         INSTANCE = this
                     }
                 }

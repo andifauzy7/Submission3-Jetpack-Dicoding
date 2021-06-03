@@ -20,7 +20,11 @@ class DetailMoviesViewModel(private val movieRepository: MovieRepository) : View
         movieRepository.deleteMoviesDB(id)
     }
 
-    fun isMovieFavorite(id: String) : LiveData<MovieEntity> {
+    fun getMovieFavorite(id: String) : MovieEntity {
         return movieRepository.getMoviesByIdDB(id)
+    }
+
+    fun isMovieFavorite(id: String) : LiveData<MovieEntity> {
+        return movieRepository.getMoviesByIdDBLiveData(id)
     }
 }

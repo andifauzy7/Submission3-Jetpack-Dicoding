@@ -14,7 +14,10 @@ interface MovieDao {
     fun insertMovies(movie: MovieEntity)
 
     @Query("SELECT * FROM moviesentities WHERE movieId = :movieId")
-    fun getMoviesById(movieId: String): LiveData<MovieEntity>
+    fun getMoviesById(movieId: String): MovieEntity
+
+    @Query("SELECT * FROM moviesentities WHERE movieId = :movieId")
+    fun getMoviesByIdDBLiveData(movieId: String): LiveData<MovieEntity>
 
     @Query("DELETE FROM moviesentities WHERE movieId = :movieId")
     fun deleteMovies(movieId: String)

@@ -45,7 +45,9 @@ class MovieRepository(context: Context) {
         }
     }
 
-    fun getMoviesByIdDB(movieId: String) : LiveData<MovieEntity> = movieDao.getMoviesById(movieId)
+    fun getMoviesByIdDB(movieId: String) : MovieEntity = movieDao.getMoviesById(movieId)
+
+    fun getMoviesByIdDBLiveData(movieId: String) : LiveData<MovieEntity> = movieDao.getMoviesByIdDBLiveData(movieId)
 
     fun deleteMoviesDB(movieId: String) {
         executorService.execute {
