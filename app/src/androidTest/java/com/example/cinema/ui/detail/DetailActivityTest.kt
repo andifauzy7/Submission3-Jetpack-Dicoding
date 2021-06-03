@@ -1,5 +1,6 @@
 package com.example.cinema.ui.detail
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
@@ -9,6 +10,7 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.cinema.MainActivity
 import com.example.cinema.R
 import com.example.cinema.data.MovieRepository
@@ -31,12 +33,14 @@ class DetailActivityTest {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var detailMoviesViewModel: DetailMoviesViewModel
     private lateinit var detailTVShowViewModel: DetailTVShowViewModel
+    private lateinit var instrumentationContext: Context
 
     private lateinit var movieRepository: MovieRepository
 
     @Before
     fun setUp() {
-        movieRepository = MovieRepository()
+        instrumentationContext = InstrumentationRegistry.getInstrumentation().context
+        movieRepository = MovieRepository(instrumentationContext)
         homeViewModel = HomeViewModel(movieRepository)
         detailMoviesViewModel = DetailMoviesViewModel(movieRepository)
         detailTVShowViewModel = DetailTVShowViewModel(movieRepository)

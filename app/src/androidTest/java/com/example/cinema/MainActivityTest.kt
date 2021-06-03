@@ -1,5 +1,6 @@
 package com.example.cinema
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
@@ -10,6 +11,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.cinema.data.MovieRepository
 import com.example.cinema.data.response.ResultMovies
 import com.example.cinema.data.response.ResultTVShow
@@ -26,10 +28,12 @@ class MainActivityTest {
     private lateinit var dummyTVShow : LiveData<Resource<List<ResultTVShow>>>
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var movieRepository: MovieRepository
+    private lateinit var instrumentationContext: Context
 
     @Before
     fun setUp() {
-        movieRepository = MovieRepository()
+        instrumentationContext = InstrumentationRegistry.getInstrumentation().context
+        movieRepository = MovieRepository(instrumentationContext)
         homeViewModel = HomeViewModel(movieRepository)
         IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
     }
