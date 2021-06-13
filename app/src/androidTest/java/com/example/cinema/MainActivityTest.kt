@@ -75,16 +75,6 @@ class MainActivityTest {
     }
 
     @Test
-    fun loadFavoriteTVShow() {
-        onView(withId(R.id.nav_view)).check(matches(isDisplayed()))
-        onView(withContentDescription(R.string.title_favorite)).perform(ViewActions.click())
-        onView(withId(R.id.tabs)).check(matches(isDisplayed()))
-        onView(withId(R.id.view_pager)).check(matches(isDisplayed()))
-        onView(withContentDescription(R.string.tv_show)).perform(ViewActions.click())
-        onView(withId(R.id.rv_show)).check(matches(isDisplayed()))
-    }
-
-    @Test
     fun insertFavoriteMovie(){
         dummyMovies = homeViewModel.getMoviesPopular()
         onView(withId(R.id.rv_popular)).check(matches(isDisplayed()))
@@ -103,6 +93,35 @@ class MainActivityTest {
         onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
         onView(withId(R.id.tv_title_movies)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title_movies)).check(matches(withText(dummyMovies.value?.data!![0].title)))
+    }
+
+    @Test
+    fun deleteFavoriteMovie(){
+        dummyMovies = homeViewModel.getMoviesPopular()
+        onView(withId(R.id.rv_popular)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_popular)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.value?.data?.size!!))
+        onView(withId(R.id.rv_popular)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+        onView(withId(R.id.tv_title_movies)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_title_movies)).check(matches(withText(dummyMovies.value?.data!![0].title)))
+        onView(withId(R.id.fab_favorite_movies)).perform(ViewActions.click())
+        onView(withId(R.id.fab_favorite_movies)).perform(ViewActions.pressBack())
+
+        onView(withContentDescription(R.string.title_favorite)).perform(ViewActions.click())
+        onView(withId(R.id.tabs)).check(matches(isDisplayed()))
+        onView(withId(R.id.view_pager)).check(matches(isDisplayed()))
+        onView(withContentDescription(R.string.movies)).perform(ViewActions.click())
+        onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_movies)).check(matches(hasChildCount(0)))
+    }
+
+    @Test
+    fun loadFavoriteTVShow() {
+        onView(withId(R.id.nav_view)).check(matches(isDisplayed()))
+        onView(withContentDescription(R.string.title_favorite)).perform(ViewActions.click())
+        onView(withId(R.id.tabs)).check(matches(isDisplayed()))
+        onView(withId(R.id.view_pager)).check(matches(isDisplayed()))
+        onView(withContentDescription(R.string.tv_show)).perform(ViewActions.click())
+        onView(withId(R.id.rv_show)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -128,30 +147,11 @@ class MainActivityTest {
     }
 
     @Test
-    fun deleteFavoriteMovie(){
-        dummyMovies = homeViewModel.getMoviesPopular()
-        onView(withId(R.id.rv_popular)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_popular)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.value?.data?.size!!))
-        onView(withId(R.id.rv_popular)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
-        onView(withId(R.id.tv_title_movies)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_title_movies)).check(matches(withText(dummyMovies.value?.data!![0].title)))
-        onView(withId(R.id.fab_favorite_movies)).perform(ViewActions.click())
-        onView(withId(R.id.fab_favorite_movies)).perform(ViewActions.pressBack())
-
-        onView(withContentDescription(R.string.title_favorite)).perform(ViewActions.click())
-        onView(withId(R.id.tabs)).check(matches(isDisplayed()))
-        onView(withId(R.id.view_pager)).check(matches(isDisplayed()))
-        onView(withContentDescription(R.string.movies)).perform(ViewActions.click())
-        onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_movies)).check(matches(hasChildCount(0)))
-    }
-
-    @Test
     fun deleteFavoriteTVShow(){
         dummyTVShow = homeViewModel.getTVShowPopular()
         onView(withId(R.id.scroll_view_home)).perform(ViewActions.swipeUp())
         onView(withId(R.id.rv_popular_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_popular_tv)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.value?.data?.size!!))
+        onView(withId(R.id.rv_popular_tv)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTVShow.value?.data?.size!!))
         onView(withId(R.id.rv_popular_tv)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
         onView(withId(R.id.tv_title_show)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title_show)).check(matches(withText(dummyTVShow.value?.data!![0].name)))
