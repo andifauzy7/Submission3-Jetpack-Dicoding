@@ -30,7 +30,9 @@ class MovieRepositoryTest {
     private val movieRepository = MovieRepository(remote, local)
 
     private val movieResponse = DataDummy.generateMovieDB()
+    private val movieResponseRemote = DataDummy.getMoviesPopular()
     private val showResponse = DataDummy.generateShowDB()
+    private val showResponseRemote = DataDummy.getTVShowPopular()
 
     @Test
     fun testGetAllMoviesDB() {
@@ -171,20 +173,62 @@ class MovieRepositoryTest {
     }
 
     @Test
-    fun testGetMoviesPopular() {}
+    fun testGetMoviesPopular() {
+        Mockito.`when`(remote.getMoviesPopular()).thenReturn(movieResponseRemote)
+        val response = movieRepository.getMoviesPopular()
+
+        verify(remote).getMoviesPopular()
+        Assert.assertNotNull(response)
+        assertEquals(response.value?.data?.size?.toLong(), movieResponseRemote.value?.data?.size?.toLong())
+    }
 
     @Test
-    fun testGetTVShowPopular() {}
+    fun testGetTVShowPopular() {
+        Mockito.`when`(remote.getTVShowPopular()).thenReturn(showResponseRemote)
+        val response = movieRepository.getTVShowPopular()
+
+        verify(remote).getTVShowPopular()
+        Assert.assertNotNull(response)
+        assertEquals(response.value?.data?.size?.toLong(), showResponseRemote.value?.data?.size?.toLong())
+    }
 
     @Test
-    fun testGetMoviesSearch() {}
+    fun testGetMoviesSearch() {
+        Mockito.`when`(remote.getMoviesSearch("1")).thenReturn(DataDummy.getMoviesSearch("1"))
+        val response = movieRepository.getMoviesSearch("1")
+
+        verify(remote).getMoviesSearch("1")
+        Assert.assertNotNull(response)
+        assertEquals(response.value?.data?.size?.toLong(), DataDummy.getMoviesSearch("1").value?.data?.size?.toLong())
+    }
 
     @Test
-    fun testGetShowSearch() {}
+    fun testGetShowSearch() {
+        Mockito.`when`(remote.getShowSearch("1")).thenReturn(DataDummy.getShowSearch("1"))
+        val response = movieRepository.getShowSearch("1")
+
+        verify(remote).getShowSearch("1")
+        Assert.assertNotNull(response)
+        assertEquals(response.value?.data?.size?.toLong(), DataDummy.getShowSearch("1").value?.data?.size?.toLong())
+    }
 
     @Test
-    fun testGetMovieDetail() {}
+    fun testGetMovieDetail() {
+        Mockito.`when`(remote.getMovieDetail("1")).thenReturn(DataDummy.getMovieDetail("1"))
+        val response = movieRepository.getMovieDetail("1")
+
+        verify(remote).getMovieDetail("1")
+        Assert.assertNotNull(response)
+        assertEquals(response.value?.data?.id, DataDummy.getMovieDetail("1").value?.data?.id)
+    }
 
     @Test
-    fun testGetTVShowDetail() {}
+    fun testGetTVShowDetail() {
+        Mockito.`when`(remote.getTVShowDetail("1")).thenReturn(DataDummy.getTVShowDetail("1"))
+        val response = movieRepository.getTVShowDetail("1")
+
+        verify(remote).getTVShowDetail("1")
+        Assert.assertNotNull(response)
+        assertEquals(response.value?.data?.id, DataDummy.getTVShowDetail("1").value?.data?.id)
+    }
 }
