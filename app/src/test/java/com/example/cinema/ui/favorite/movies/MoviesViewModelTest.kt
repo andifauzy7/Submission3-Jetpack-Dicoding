@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST", "DEPRECATION")
+
 package com.example.cinema.ui.favorite.movies
 
 import androidx.paging.DataSource
@@ -32,7 +34,7 @@ class MoviesViewModelTest {
     fun getAllMovies() {
         val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
         `when`(movieRepository.getAllMoviesDB()).thenReturn(dataSourceFactory)
-        val resultViewModel = viewModel.getAllMovies()
+        viewModel.getAllMovies()
 
         val movieEntities = PagedListUtil.mockPagedList(DataDummy.generateMovieDB())
         Mockito.verify(movieRepository).getAllMoviesDB()

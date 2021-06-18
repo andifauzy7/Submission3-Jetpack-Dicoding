@@ -13,9 +13,12 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.cinema.MainActivity
 import com.example.cinema.R
+import com.example.cinema.data.LocalDataSource
 import com.example.cinema.data.MovieRepository
+import com.example.cinema.data.RemoteDataSource
 import com.example.cinema.data.response.ResultMovies
 import com.example.cinema.data.response.ResultTVShow
+import com.example.cinema.room.MovieDatabase
 import com.example.cinema.ui.detail.movies.DetailMoviesViewModel
 import com.example.cinema.ui.detail.tvshow.DetailTVShowViewModel
 import com.example.cinema.ui.home.HomeViewModel
@@ -40,7 +43,10 @@ class DetailActivityTest {
     @Before
     fun setUp() {
         instrumentationContext = InstrumentationRegistry.getInstrumentation().context
-        movieRepository = MovieRepository(instrumentationContext)
+        val database = MovieDatabase.getInstance(instrumentationContext)
+        val remoteDataSource = RemoteDataSource.getInstance()
+        val localDataSource = LocalDataSource.getInstance(database.movieDao())
+        movieRepository = MovieRepository(remoteDataSource, localDataSource)
         homeViewModel = HomeViewModel(movieRepository)
         detailMoviesViewModel = DetailMoviesViewModel(movieRepository)
         detailTVShowViewModel = DetailTVShowViewModel(movieRepository)

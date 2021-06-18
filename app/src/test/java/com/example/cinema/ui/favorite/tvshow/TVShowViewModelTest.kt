@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.example.cinema.ui.favorite.tvshow
 
 import androidx.paging.DataSource
@@ -30,7 +32,7 @@ class TVShowViewModelTest {
     fun getAllMShows() {
         val dataSourceFactory = Mockito.mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TVShowEntity>
         Mockito.`when`(movieRepository.getAllTVShowDB()).thenReturn(dataSourceFactory)
-        val resultViewModel = viewModel.getAllTVShow()
+        viewModel.getAllTVShow()
 
         val showEntities = PagedListUtil.mockPagedList(DataDummy.generateShowDB())
         Mockito.verify(movieRepository).getAllTVShowDB()
