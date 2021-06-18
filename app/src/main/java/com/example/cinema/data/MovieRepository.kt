@@ -8,7 +8,7 @@ import com.example.cinema.room.entity.MovieEntity
 import com.example.cinema.room.entity.TVShowEntity
 import com.example.cinema.utils.Resource
 
-class MovieRepository private constructor(
+class MovieRepository(
         private val remoteDataSource: RemoteDataSource,
         private val localDataSource: LocalDataSource) {
 
